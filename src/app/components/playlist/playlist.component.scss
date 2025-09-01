@@ -1,0 +1,90 @@
+.list {
+  padding: 8px;
+  background: #111; 
+  border-right: 1px solid rgba(255,255,255,0.08);
+
+  @media (max-width: 768px) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+}
+
+.scroll {
+  max-height: 55vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+  border-radius: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255,255,255,0.08);
+  }
+
+  &.active {
+    background: rgba(128,0,128,0.35); // purple accent
+  }
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+}
+
+.txt {
+  h4 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.85rem;
+  }
+}
+
+// ...existing code...
+.play {
+  /* now styles for the play button element (button.play / .btn-play) */
+  color: #9b59b6; // purple accent (unchanged)
+  font-size: 1.4rem;
+  margin-right: 8px;
+  transition: transform 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  &:hover {
+    transform: scale(1.15);
+    color: #b97ddb;
+  }
+}
+
+/* support the new .btn-play name (keeps old .play usage) */
+.btn-play { @extend .play; }

@@ -1,0 +1,89 @@
+:host {
+  display: block;
+  background-color: #0d0d0d; /* dark background */
+  min-height: 100vh;
+  color: #e0e0e0;
+  overflow-x: hidden; // prevent horizontal scroll
+}
+
+/* Header */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  background: rgba(18, 18, 18, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+}
+
+.app-title {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #a855f7;
+  font-size: 1.25rem;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+/* Main content area */
+.app-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  padding: 1rem;
+  width: 100%;
+}
+
+/* Player and Playlist container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  // Let Bootstrap handle width responsiveness
+  width: 100%;
+  max-width: 100%; 
+  border-radius: 20px;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 30px rgba(168, 139, 250, 0.3);
+  padding: 1.25rem;
+
+  // on larger screens, center with Bootstrap-like container behavior
+  @media (min-width: 992px) {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  opacity: 0.9;
+  padding: 1rem;
+  color: #e0e0e0;
+  font-size: 0.875rem;
+}
+
+/* Floating music notes */
+.note {
+  position: fixed;
+  font-size: 18px;
+  pointer-events: none;
+  animation: floatUp 6s linear forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-150vh) rotate(360deg); opacity: 0; }
+}

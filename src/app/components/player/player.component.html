@@ -1,0 +1,20 @@
+<div class="player card" *ngIf="current">
+  <div class="meta">
+    <img *ngIf="current.cover" [src]="current.cover" alt="cover" class="cover" />
+    <div class="titles">
+      <h2>{{ current.title }}</h2>
+      <p>{{ current.artist }}</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <input class="range" type="range" min="0" max="1" step="0.001" [value]="progress" (input)="seek($event)"/>
+    <div class="time"><span>{{ fmt(cur) }}</span><span>{{ fmt(dur) }}</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="icon" (click)="prev()">⏮</button>
+    <button class="icon" (click)="toggle()">{{ isPlaying ? '⏸' : '▶' }}</button>
+    <button class="icon" (click)="next()">⏭</button>
+  </div>
+</div>

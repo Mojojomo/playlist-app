@@ -1,0 +1,61 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AudioService } from '../../services/audio.service';
+import { PlaylistService, Song } from '../../services/playlist.service';
+import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-player',
+  templateUrl: './player.component.html',
+  styleUrls: ['./player.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
+})
+export class PlayerComponent implements OnInit, OnDestroy {
+  current: Song | null = null;
+  isPlaying = false;
+  progress = 0;
+  cur = 0;
+  dur = 0;
+  sub = new Subscription();
+  songs: Song[] = [];
+
+  constructor(private audio: AudioService, private playlist: PlaylistService) {}
+
+  ngOnInit(): void {
+    this.sub.add(this.playlist.getAll().subscribe(songs => {
+      this.songs = songs;
+      this.audio.loadQueue(this.songs, 0);
+    }));
+
+    this.sub.add(this.audio.current$.subscribe(s => this.current = s));
+    this.sub.add(this.audio.isPlaying$.subscribe(v => this.isPlaying = v));
+    this.sub.add(this.audio.progress$.subscribe(p => this.progress = p));
+    this.sub.add(this.audio.currentTime$.subscribe(t => this.cur = t));
+    this.sub.add(this.audio.duration$.subscribe(d => this.dur = d));
+  }
+
+  ngOnDestroy(): void { this.sub.unsubscribe(); }
+
+  toggle() { this.audio.toggle(); }
+  prev() { this.audio.previous(); }
+  next() { this.audio.next(); }
+
+  seek(ev: Event) {
+    const v = Number((ev.target as HTMLInputElement).value);
+    this.audio.seekTo(v);
+  }
+
+  fmt(t: number) {
+    if (!t || !isFinite(t)) return '0:00';
+    const m = Math.floor(t/60); 
+    const s = Math.floor(t%60).toString().padStart(2,'0');
+    return `${m}:${s}`;
+  }
+
+   get progressPct(): string {
+    // If progress is 0..1 convert to percent, if already 0..100 use it directly
+    const p = (this.progress <= 1) ? (this.progress * 100) : this.progress;
+    return `${Math.max(0, Math.min(100, p))}%`;
+  }
+}
