@@ -8,8 +8,20 @@
   </div>
 
   <div class="timeline">
-    <input class="range" type="range" min="0" max="1" step="0.001" [value]="progress" (input)="seek($event)"/>
-    <div class="time"><span>{{ fmt(cur) }}</span><span>{{ fmt(dur) }}</span></div>
+    <input
+      class="range"
+      type="range"
+      min="0"
+      max="1"
+      step="0.001"
+      [value]="progress"
+      [style.background]="progressBackground"
+      (input)="seek($event)"
+    />
+    <div class="time">
+      <span>{{ fmt(cur) }}</span>
+      <span>{{ fmt(dur) }}</span>
+    </div>
   </div>
 
   <div class="controls">

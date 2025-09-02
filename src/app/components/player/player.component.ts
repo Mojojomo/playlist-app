@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AudioService } from '../../services/audio.service';
 import { PlaylistService, Song } from '../../services/playlist.service';
 import { Subscription } from 'rxjs';
@@ -53,9 +53,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
     return `${m}:${s}`;
   }
 
-   get progressPct(): string {
-    // If progress is 0..1 convert to percent, if already 0..100 use it directly
+  get progressPct(): string {
     const p = (this.progress <= 1) ? (this.progress * 100) : this.progress;
     return `${Math.max(0, Math.min(100, p))}%`;
+  }
+
+  get progressBackground(): string {
+    const pct = this.progressPct;
+    return `linear-gradient(90deg, #9b59b6 0%, #9b59b6 ${pct}, #444 ${pct}, #444 100%)`;
   }
 }

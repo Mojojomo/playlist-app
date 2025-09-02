@@ -41,7 +41,6 @@
     appearance: none;
     height: 4px;
     border-radius: 4px;
-    background: #444;
 
     &::-webkit-slider-thumb {
       appearance: none;
@@ -77,38 +76,6 @@
     &:hover {
       transform: scale(1.15);
       color: #9b59b6; // purple accent
-    }
-  }
-
-  .timeline {
-    display: grid;
-    gap: 6px;
-
-    input[type="range"] {
-      width: 100%;
-      appearance: none;
-      height: 4px;
-      border-radius: 4px;
-      /* use CSS variable --progress (set inline) to paint passed portion purple */
-      background: linear-gradient(90deg, #9b59b6 var(--progress, 0%), #444 var(--progress, 0%));
-
-      &::-webkit-slider-thumb {
-        appearance: none;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: #9b59b6;
-        cursor: pointer;
-      }
-
-      /* ensure Firefox uses the same look */
-      &::-moz-range-track {
-        background: transparent;
-      }
-
-      &::-moz-range-progress {
-        background: #9b59b6;
-      }
     }
   }
 }
