@@ -25,8 +25,26 @@
   </div>
 
   <div class="controls">
-    <button class="icon" (click)="prev()">⏮</button>
-    <button class="icon" (click)="toggle()">{{ isPlaying ? '⏸' : '▶' }}</button>
-    <button class="icon" (click)="next()">⏭</button>
+    <button class="shuffle-btn" 
+            [class.active]="isShuffled" 
+            (click)="shuffle()"
+            title="Shuffle Playlist">
+      <lucide-icon [img]="Shuffle"></lucide-icon>
+    </button>
+    <button *ngIf="isShuffled" 
+            class="reset-btn" 
+            (click)="resetShuffle()"
+            title="Reset to Original Order">
+      <lucide-icon [img]="RotateCcw"></lucide-icon>
+    </button>
+    <button class="icon" (click)="prev()" title="Previous Track">
+      <lucide-icon [img]="SkipBack"></lucide-icon>
+    </button>
+    <button class="icon" (click)="toggle()" title="Play/Pause">
+      <lucide-icon [img]="isPlaying ? Pause : Play"></lucide-icon>
+    </button>
+    <button class="icon" (click)="next()" title="Next Track">
+      <lucide-icon [img]="SkipForward"></lucide-icon>
+    </button>
   </div>
 </div>

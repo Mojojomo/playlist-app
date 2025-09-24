@@ -63,19 +63,70 @@
 .controls {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  align-items: center;
+  gap: 8px;
 
   button {
     background: transparent;
     border: none;
     color: #f5f5f5;
-    font-size: 1.6rem;
     cursor: pointer;
-    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 10px;
+    border-radius: 12px;
+    transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
-      transform: scale(1.15);
-      color: #9b59b6; // purple accent
+      transform: scale(1.1);
+      color: #9b59b6;
+      background: rgba(155, 89, 182, 0.1);
+    }
+
+    lucide-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .icon {
+    lucide-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .shuffle-btn, .reset-btn {
+    opacity: 0.7;
+    
+    lucide-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      opacity: 1;
+      background: rgba(155, 89, 182, 0.2);
+    }
+
+    &.active {
+      opacity: 1;
+      color: #9b59b6;
+      background: rgba(155, 89, 182, 0.3);
+
+      &:hover {
+        background: rgba(155, 89, 182, 0.4);
+      }
+    }
+  }
+
+  .reset-btn {
+    color: #ff6b6b;
+    
+    &:hover {
+      color: #ff5252;
+      background: rgba(255, 107, 107, 0.2);
     }
   }
 }

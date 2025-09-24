@@ -3,33 +3,46 @@ import { AudioService } from '../../services/audio.service';
 import { PlaylistService, Song } from '../../services/playlist.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule, Shuffle, SkipBack, SkipForward, Play, Pause, RotateCcw } from 'lucide-angular';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, LucideAngularModule]
 })
 export class PlayerComponent implements OnInit, OnDestroy {
   current: Song | null = null;
   isPlaying = false;
+  isShuffled = false;
   progress = 0;
   cur = 0;
   dur = 0;
   sub = new Subscription();
   songs: Song[] = [];
 
+  // Lucide icons
+  readonly Shuffle = Shuffle;
+  readonly SkipBack = SkipBack;
+  readonly SkipForward = SkipForward;
+  readonly Play = Play;
+  readonly Pause = Pause;
+  readonly RotateCcw = RotateCcw;
+
   constructor(private audio: AudioService, private playlist: PlaylistService) {}
 
   ngOnInit(): void {
     this.sub.add(this.playlist.getAll().subscribe(songs => {
       this.songs = songs;
-      this.audio.loadQueue(this.songs, 0);
+      if (songs.length > 0) {
+        this.audio.loadQueue(this.songs, 0);
+      }
     }));
 
     this.sub.add(this.audio.current$.subscribe(s => this.current = s));
     this.sub.add(this.audio.isPlaying$.subscribe(v => this.isPlaying = v));
+    this.sub.add(this.audio.isShuffled$.subscribe(v => this.isShuffled = v));
     this.sub.add(this.audio.progress$.subscribe(p => this.progress = p));
     this.sub.add(this.audio.currentTime$.subscribe(t => this.cur = t));
     this.sub.add(this.audio.duration$.subscribe(d => this.dur = d));
@@ -40,6 +53,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   toggle() { this.audio.toggle(); }
   prev() { this.audio.previous(); }
   next() { this.audio.next(); }
+  shuffle() { this.audio.shuffle(); }
+  resetShuffle() { this.audio.resetShuffle(); }
 
   seek(ev: Event) {
     const v = Number((ev.target as HTMLInputElement).value);

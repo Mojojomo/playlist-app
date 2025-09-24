@@ -25,6 +25,7 @@
     "@angular/ssr": "^18.0.4",
     "express": "^4.18.2",
     "googleapis": "^159.0.0",
+    "lucide-angular": "^0.544.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

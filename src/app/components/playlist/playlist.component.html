@@ -1,6 +1,6 @@
 <section class="list card" aria-label="Playlist">
   <div class="scroll">
-    <div class="row" *ngFor="let s of songs; let i = index" (click)="play(s,i)" [class.active]="s.id===currentId">
+    <div class="row" *ngFor="let s of songs; let i = index" (click)="play(s,i)" [class.active]="isCurrentlyPlaying(s, i)">
       <img *ngIf="s.cover" [src]="s.cover" alt="cover"/>
       <div class="txt">
         <h4>{{ s.title }}</h4>
